@@ -82,6 +82,8 @@ jobs:
           OLD_NETDATA_HASH=$(cat Makefile | grep PKG_HASH:= | sed 's/.*=//')
           sed -i "s/$OLD_NETDATA_VERSION/$NETDATA_VERSION/g" Makefile
           sed -i "s/$OLD_NETDATA_HASH/$NETDATA_HASH/g" Makefile
+          cd patches
+          rm 005-freebsd.patch
   
       - name: Generate configuration file
         run: |
