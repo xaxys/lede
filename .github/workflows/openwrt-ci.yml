@@ -67,23 +67,23 @@ jobs:
           cd package/feeds/luci
           git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 
-      - name: Update softwares
-        run: |
-          NETDATA_REPO=netdata/netdata
-          NETDATA_ASSET=netdata-latest.tar.gz
-          NETDATA_RELEASE=https://github.com/$NETDATA_REPO/releases/latest/download/$NETDATA_ASSET
-          NETDATA_VERSION=$(wget -q -O- https://api.github.com/repos/$NETDATA_REPO/releases/latest | jq -r '.tag_name' | sed 's/v//')
-          wget -q $NETDATA_RELEASE
-          NETDATA_HASH=$(sha256sum $NETDATA_ASSET | cut -f1 -d' ')
-          echo "version $NETDATA_VERSION, hash $NETDATA_HASH"
-          rm $NETDATA_ASSET
-          cd feeds/packages/admin/netdata
-          OLD_NETDATA_VERSION=$(cat Makefile | grep PKG_VERSION:= | sed 's/.*=//')
-          OLD_NETDATA_HASH=$(cat Makefile | grep PKG_HASH:= | sed 's/.*=//')
-          sed -i "s/$OLD_NETDATA_VERSION/$NETDATA_VERSION/g" Makefile
-          sed -i "s/$OLD_NETDATA_HASH/$NETDATA_HASH/g" Makefile
-          cd patches
-          rm 005-freebsd.patch
+#       - name: Update softwares
+#         run: |
+#           NETDATA_REPO=netdata/netdata
+#           NETDATA_ASSET=netdata-latest.tar.gz
+#           NETDATA_RELEASE=https://github.com/$NETDATA_REPO/releases/latest/download/$NETDATA_ASSET
+#           NETDATA_VERSION=$(wget -q -O- https://api.github.com/repos/$NETDATA_REPO/releases/latest | jq -r '.tag_name' | sed 's/v//')
+#           wget -q $NETDATA_RELEASE
+#           NETDATA_HASH=$(sha256sum $NETDATA_ASSET | cut -f1 -d' ')
+#           echo "version $NETDATA_VERSION, hash $NETDATA_HASH"
+#           rm $NETDATA_ASSET
+#           cd feeds/packages/admin/netdata
+#           OLD_NETDATA_VERSION=$(cat Makefile | grep PKG_VERSION:= | sed 's/.*=//')
+#           OLD_NETDATA_HASH=$(cat Makefile | grep PKG_HASH:= | sed 's/.*=//')
+#           sed -i "s/$OLD_NETDATA_VERSION/$NETDATA_VERSION/g" Makefile
+#           sed -i "s/$OLD_NETDATA_HASH/$NETDATA_HASH/g" Makefile
+#           cd patches
+#           rm 005-freebsd.patch
   
       - name: Generate configuration file
         run: |
