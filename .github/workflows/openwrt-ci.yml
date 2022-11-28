@@ -64,8 +64,6 @@ jobs:
           echo 'src-git openclash https://github.com/vernesong/OpenClash' >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cd package/feeds/luci
-          git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 
 #       - name: Update softwares
 #         run: |
@@ -130,7 +128,6 @@ jobs:
           CONFIG_PACKAGE_luci-i18n-argon-config-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-netdata-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-wrtbwmon-zh-cn=y
-          CONFIG_PACKAGE_luci-lib-ipkg=y
           CONFIG_PACKAGE_luci-proto-ipv6=y
           CONFIG_PACKAGE_luci-theme-argon-mod=y
           CONFIG_PACKAGE_luci-theme-material=y
