@@ -61,7 +61,7 @@ jobs:
       - name: Update feeds
         run: |
           echo 'src-git openclash https://github.com/vernesong/OpenClash' >> feeds.conf.default
-          echo 'src-git ddnsgo https://github.com/sirpdboy/luci-app-ddns-go' >> feeds.conf.default
+          echo 'src-git ddnsgo https://github.com/xaxys/luci-app-ddns-go' >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
