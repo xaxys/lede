@@ -65,6 +65,11 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Manually add package 
+        run: |
+          git clone https://github.com/fangli/openwrt-vm-tools package/open-vm-tools
+          git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
+          
 #       - name: Update softwares
 #         run: |
 #           NETDATA_REPO=netdata/netdata
@@ -151,33 +156,36 @@ jobs:
           CONFIG_TARGET_ROOTFS_PARTSIZE=512
           CONFIG_TESTING_KERNEL=y
           # CONFIG_VMDK_IMAGES is not set
-
+          
+          # nginx
           CONFIG_PACKAGE_nginx=y
           CONFIG_PACKAGE_nginx-mod-luci-ssl=y
           CONFIG_PACKAGE_nginx-util=y
+          CONFIG_PACKAGE_luci-nginx=y
+          CONFIG_PACKAGE_luci-ssl-nginx=y
           
+          # git
           CONFIG_PACKAGE_git=y
           CONFIG_PACKAGE_git-http=y
           CONFIG_PACKAGE_git-lfs=y
 
+          # official packages
           CONFIG_PACKAGE_luci-app-acme=y
-          CONFIG_PACKAGE_luci-app-advanced-reboot=y
           CONFIG_PACKAGE_luci-app-ddns-go=y
           CONFIG_PACKAGE_luci-app-frpc=y
           CONFIG_PACKAGE_luci-app-frps=y
           CONFIG_PACKAGE_luci-app-haproxy-tcp=y
+          CONFIG_PACKAGE_luci-app-qos=y
+          CONFIG_PACKAGE_luci-app-ramfree=y
           CONFIG_PACKAGE_luci-app-socat=y
           CONFIG_PACKAGE_luci-app-softethervpn=y
           CONFIG_PACKAGE_luci-app-tinyproxy=y
           CONFIG_PACKAGE_luci-app-usb-printer=y
-          CONFIG_PACKAGE_luci-nginx=y
-          CONFIG_PACKAGE_luci-ssl-nginx=y
-          
-          CONFIG_PACKAGE_luci-i18n-ddns-go-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-frpc-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-frps-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-socat-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-softethervpn-zh-cn=y
+          CONFIG_PACKAGE_luci-app-v2ray-server=y
+
+          # 3rd party packages
+          CONFIG_PACKAGE_open-vm-tools=y
+          CONFIG_PACKAGE_luci-app-pushbot=y
           
           EOF
 
