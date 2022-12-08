@@ -156,7 +156,13 @@ jobs:
           CONFIG_TARGET_ROOTFS_PARTSIZE=512
           CONFIG_TESTING_KERNEL=y
           # CONFIG_VMDK_IMAGES is not set
-          
+
+          # acme
+          CONFIG_PACKAGE_acme=y
+          CONFIG_PACKAGE_acme-deploy=y
+          CONFIG_PACKAGE_acme-dnsapi=y
+          CONFIG_PACKAGE_acme-notify=y
+
           # nginx
           CONFIG_PACKAGE_nginx=y
           CONFIG_PACKAGE_nginx-mod-luci-ssl=y
