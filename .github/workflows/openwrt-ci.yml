@@ -59,8 +59,6 @@ jobs:
         run: |
           echo 'src-git openclash https://github.com/vernesong/OpenClash' >> feeds.conf.default
           echo 'src-git ddnsgo https://github.com/xaxys/luci-app-ddns-go' >> feeds.conf.default
-          echo 'src-git smartdns https://github.com/pymumu/openwrt-smartdns' >> feeds.conf.default
-          echo 'src-git luci-app-smartdns https://github.com/pymumu/luci-app-smartdns' >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
@@ -69,6 +67,8 @@ jobs:
           git clone https://github.com/fangli/openwrt-vm-tools package/open-vm-tools
           git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
           git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tcpdump
+          git clone https://github.com/pymumu/openwrt-smartdns package/smartdns
+          git clone https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
           
 #       - name: Update softwares
 #         run: |
@@ -160,7 +160,6 @@ jobs:
           CONFIG_TESTING_KERNEL=y
           CONFIG_VMDK_IMAGES=y
 
-
           # acme
           CONFIG_PACKAGE_acme=y
           CONFIG_PACKAGE_acme-deploy=y
@@ -199,11 +198,11 @@ jobs:
 
           # tcpdump
           CONFIG_PACKAGE_tcpdump=y
+          CONFIG_PACKAGE_luci-app-tcpdump=y
 
           # 3rd party packages
           CONFIG_PACKAGE_open-vm-tools=y
           CONFIG_PACKAGE_luci-app-pushbot=y
-          CONFIG_PACKAGE_luci-app-tcpdump=y
           
           EOF
 
