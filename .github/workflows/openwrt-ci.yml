@@ -48,6 +48,10 @@ jobs:
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Shanghai"
 
+      - name: Install tools
+        run: |
+          sudo -E apt -y install qemu-utils
+
       - name: Checkout OpenWrt
         uses: actions/checkout@v3
 
@@ -55,13 +59,16 @@ jobs:
         run: |
           echo 'src-git openclash https://github.com/vernesong/OpenClash' >> feeds.conf.default
           echo 'src-git ddnsgo https://github.com/xaxys/luci-app-ddns-go' >> feeds.conf.default
+          echo 'src-git smartdns https://github.com/pymumu/openwrt-smartdns' >> feeds.conf.default
+          echo 'src-git luci-app-smartdns https://github.com/pymumu/luci-app-smartdns' >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Manually add package 
+      - name: Manually add package
         run: |
           git clone https://github.com/fangli/openwrt-vm-tools package/open-vm-tools
           git clone https://github.com/zzsj0928/luci-app-pushbot package/luci-app-pushbot
+          git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tcpdump
           
 #       - name: Update softwares
 #         run: |
@@ -147,10 +154,12 @@ jobs:
           CONFIG_PACKAGE_ruby-stringio=y
           CONFIG_PACKAGE_ruby-strscan=y
           CONFIG_PACKAGE_ruby-yaml=y
+          CONFIG_PACKAGE_ser2net=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_TARGET_ROOTFS_PARTSIZE=512
           CONFIG_TESTING_KERNEL=y
-          # CONFIG_VMDK_IMAGES is not set
+          CONFIG_VMDK_IMAGES=y
+
 
           # acme
           CONFIG_PACKAGE_acme=y
@@ -184,9 +193,17 @@ jobs:
           CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-v2ray-server=y
 
+          # smartdns
+          CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_luci-app-smartdns=y
+
+          # tcpdump
+          CONFIG_PACKAGE_tcpdump=y
+
           # 3rd party packages
           CONFIG_PACKAGE_open-vm-tools=y
           CONFIG_PACKAGE_luci-app-pushbot=y
+          CONFIG_PACKAGE_luci-app-tcpdump=y
           
           EOF
 
