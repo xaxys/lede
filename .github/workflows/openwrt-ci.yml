@@ -69,6 +69,7 @@ jobs:
           git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tcpdump
           git clone https://github.com/pymumu/openwrt-smartdns package/smartdns
           git clone https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
+          git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
           
 #       - name: Update softwares
 #         run: |
@@ -191,6 +192,9 @@ jobs:
           CONFIG_PACKAGE_luci-app-tinyproxy=y
           CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-v2ray-server=y
+          CONFIG_PACKAGE_headscale=y
+          CONFIG_PACKAGE_tailscale=y
+          CONFIG_PACKAGE_tailscaled=y
 
           # smartdns
           CONFIG_PACKAGE_smartdns=y
@@ -199,6 +203,9 @@ jobs:
           # tcpdump
           CONFIG_PACKAGE_tcpdump=y
           CONFIG_PACKAGE_luci-app-tcpdump=y
+
+          # tailscale
+          CONFIG_PACKAGE_luci-app-tailscale=y
 
           # 3rd party packages
           CONFIG_PACKAGE_open-vm-tools=y
